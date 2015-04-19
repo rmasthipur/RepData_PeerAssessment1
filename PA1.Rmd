@@ -7,7 +7,7 @@ output:
 
 
 ## Loading and preprocessing the data
-```{r, echo=TRUE}
+```{r, echo=TRUE, results='markup'}
 setwd("C:/Users/ctsuser1/Documents/My Data Sources")
 act <- read.csv("activity.csv")
 act1 <- act[complete.cases(act),]
@@ -16,7 +16,7 @@ act1$date <- as.Date(as.character(act1$date),"%Y-%m-%d")
 
 ## What is mean total number of steps taken per day?
 This following code proivde an agreegrate number of steps taken each day
-```{r, echo=TRUE}
+```{r, echo=TRUE, results='markup'}
 aggregate(steps~date, data=act1, sum)
 hist(aggregate(steps~date, data=act1, sum)$steps,col="red", xlab="#of Steps", main='Histogram of daily number of steps')
 ```
@@ -24,23 +24,23 @@ hist(aggregate(steps~date, data=act1, sum)$steps,col="red", xlab="#of Steps", ma
 The mean and median of the total number of steps taken per day are as follows
 
 Mean
-```{r, echo=TRUE}
+```{r, echo=TRUE, results='markup'}
 mean(aggregate(steps~date, data=act1, sum)$steps)
 ```
 
 Median
-```{r, echo=TRUE}
+```{r, echo=TRUE, results='markup'}
 median(aggregate(steps~date, data=act1, sum)$steps)
 ```
 
 ## What is the average daily activity pattern?
 Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
-```{r, echo=TRUE}
+```{r, echo=TRUE, results='markup'}
 plot(x=aggregate(steps~interval, data=act1, mean)$interval, y=aggregate(steps~interval, data=act1, mean)$steps, data=sam2, type='l', xlab='Time Interval', ylab='Average Steps')
 ```
 Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
-```{r, echo=TRUE}
+```{r, echo=TRUE, results='markup'}
 aggregate(steps~interval, data=act1, mean)[which.max(aggregate(steps~interval, data=act1, mean)$steps),]
 ```
 
@@ -50,7 +50,7 @@ Calculate and report the total number of missing values in the dataset (i.e. the
 sum(!complete.cases(act))
 ```
 Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
-```{r, echo=TRUE}
+```{r, echo=TRUE, results='markup'}
 act3 <- act
 act3[is.na(act3)] <- 0
 ```
@@ -58,19 +58,19 @@ Create a new dataset that is equal to the original dataset but with the missing 
 Ans - Dataset creates 'act3'
 Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
-```{r, echo=TRUE}
+```{r, echo=TRUE, results='markup'}
 act3$date <- as.Date(as.character(act3$date),"%Y-%m-%d")
 hist(aggregate(steps~date, data=act3, sum)$steps,col="red", xlab="#of Steps", main='Histogram of daily number of steps')
 ```
 The mean and median of the total number of steps taken per day after replacing the NA's with zero are as follows
 
 Mean
-```{r, echo=TRUE}
+```{r, echo=TRUE, results='markup'}
 mean(aggregate(steps~date, data=act3, sum)$steps)
 ```
 
 Median
-```{r, echo=TRUE}
+```{r, echo=TRUE, results='markup'}
 median(aggregate(steps~date, data=act3, sum)$steps)
 ```
 
@@ -79,7 +79,7 @@ Conslusion The mean and mean and median differr with the orginal dataset ingorin
 ## Are there differences in activity patterns between weekdays and weekends?
 
     Create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
-```{r, echo=TRUE}
+```{r, echo=TRUE, results='markup'}
 act3$weekday <- weekdays(act3$date)
 act3$wd <- as.factor(if(act3$weekday=='Sunday'|act3$weekday=='Saturday') 1 else 0)
 ```
